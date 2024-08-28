@@ -1,3 +1,4 @@
+# Load necessary libraries
 library(dplyr)
 library(ggplot2)
 library(corrplot)
@@ -18,7 +19,7 @@ library(smotefamily)
 loan_data <- read_csv("/Users/reedlabar/Documents/Business Analytics /690 Project/690 Loan data Updated.csv")
 
 
-#####Data Preprocessing####
+Data Preprocessing
 
 
 colSums(is.na(loan_data))
@@ -30,7 +31,6 @@ missing_vars <- colnames(loan_data)[colSums(is.na(loan_data)) > 0]
 print(missing_vars)
 
 
-# double check before you proceeed with your model
 print(anyNA(loan_data))
 
 #Formula
@@ -166,7 +166,7 @@ vif_model <- lm(loan_amnt ~ delinq_2yrs + int_rate + annual_inc, data = data_for
 # Calculate VIF
 vif_values <- vif(vif_model)
 
-# Display VIF values
+
 # Display VIF values
 print(vif_values)
 
@@ -192,10 +192,6 @@ ggplot(vif_data, aes(x = reorder(Variable, VIF), y = VIF)) +
   coord_flip() +
   labs(title = "Variance Inflation Factor (VIF) Values", x = "Predictors", y = "VIF") +
   theme_minimal()
-
-
-######
-#Imabalanced Classes (Couldnt figure it out)
 
 
 
@@ -233,7 +229,7 @@ table(data_undersampled$delinq_2yrs_category)
 
 
 
-#######Distribution of Classes##########
+Distribution of Classes
 
 
 # Ensure 'loan_status' and 'delinq_2yrs_category' are factors
@@ -329,8 +325,7 @@ ggplot(filtered_data, aes(x = predicted_values_filtered, y = residuals_filtered)
 
 
 
-#KNN
-#####k-NN#####
+KNN
 
 
 # Data Preprocessing
@@ -412,7 +407,7 @@ ggplot(plot_data, aes(x = Actual, y = Predicted)) +
 
 
 # Random Forest Model
-#####Random Forest######
+
 set.seed(123)
 random_forest_model <- randomForest(loan_status ~ loan_amnt + delinq_2yrs_category + int_rate + annual_inc, data = data_for_analysis, ntree = 100, importance = TRUE)
 print(random_forest_model)
@@ -530,4 +525,6 @@ print(conf_matrix)
 # Print neural network model summary
 print(nn)
 print(nn$call)
+
+
 
