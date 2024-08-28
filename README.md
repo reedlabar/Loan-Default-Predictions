@@ -49,7 +49,7 @@ count_outliers <- function(column) {
   }
 }
 
-# Applying the function accros all columns to cound outliers 
+# Applying the function across all columns to cound outliers 
 outliers_counts <- sapply(loan_data,count_outliers)
 
 #Displaying the number of outliers per column
